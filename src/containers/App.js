@@ -3,6 +3,10 @@ import './App.css';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 class App extends Component {
+  constructor(props) {
+    super(props)
+    console.log('[App.js] initialization');
+  }
 
   state  = {
     persons: [
@@ -13,6 +17,23 @@ class App extends Component {
     others : "Hey Jude",
     showPersons : false
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps' , props);
+    return state;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  } 
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
 
 
   nameChangedHandler =(event , id) => {
@@ -59,6 +80,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Cockpit 
+          name = {this.props.appName}
           persons= {this.state.persons}
           showPersons= {this.state.showPersons}
           clicked= {this.togglePersonsHandler}/>

@@ -1,9 +1,20 @@
-import React , {Componet} from 'react';
+import React , { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 import './Cockpit.css'
 
-const cockpit = (props) => {
-
+const Cockpit = (props) => {
+  useEffect( ()=> {
+    console.log('[Cockpit.js] useEffect');
+    
+    //HTTP Request!
+    setTimeout(()=> {
+      alert('Saved data to cloud');
+    })
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect')
+    }
+  }, [props.persons]);
+  
     const assignedClasses =[];
     let btnClass = '';
 
@@ -21,7 +32,7 @@ const cockpit = (props) => {
      
     return(
         <div className= {classes.Cockpit}>
-            <h1>Hello World</h1>
+            <h1>{props.name}</h1>
             <p className={assignedClasses.join(' ')}>I'm learning React</p>
             <button 
                 className={btnClass}
@@ -30,6 +41,6 @@ const cockpit = (props) => {
     );
 }
 
-export default cockpit;
+export default Cockpit;
 
       
