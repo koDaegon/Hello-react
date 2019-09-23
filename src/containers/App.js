@@ -15,7 +15,8 @@ class App extends Component {
       {id : 'agsh3' , name : 'Park' , age : 27}
     ],
     others : "Hey Jude",
-    showPersons : false
+    showPersons : false,
+    showCockpit : true
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -60,6 +61,13 @@ class App extends Component {
     });
   }
 
+  toggleCockpitHandler = () => {
+    const currentCockpitStatus = this.state.showCockpit;
+    this.setState({
+      showCockpit : !(currentCockpitStatus)
+    });
+  }
+
   deletePersonHandler = ( personIndex ) => {
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
@@ -79,11 +87,16 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <Cockpit 
-          name = {this.props.appName}
-          persons= {this.state.persons}
-          showPersons= {this.state.showPersons}
-          clicked= {this.togglePersonsHandler}/>
+        <button onClick = {this.toggleCockpitHandler}>
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? 
+          <Cockpit 
+            name = {this.props.appName}
+            personsLength= {this.state.persons.length}
+            showPersons= {this.state.showPersons}
+            clicked= {this.togglePersonsHandler}/>
+          : null}
         {persons}
       </div>
     );
@@ -91,41 +104,4 @@ class App extends Component {
 }
 
 export default App;
-
-// const app = props => {
-  
-//   const [personStaate , setPersonState] = useState({
-//     person : [
-//       {name : 'kim' , age : '22'},
-//       {name : 'park' , age : '25'},
-//       {name : 'Lee' , age : '27'}
-//     ],
-//   })
-
-//   const [otherState , setOtherState] = useState("others");
-
-//   const changePersonName = props => {
-//     setPersonState ({
-//       person : [
-//         {name : 'Kim' , age : '00'},
-//         {name : 'Park' , age : '01'},
-//         {name : 'Lee' , age : '02'}
-//       ]
-//     })
-//   }
-
-//   console.log(personStaate , otherState);
-  
-//   return (
-//           <div className="App">
-//             <h1>Hello World</h1>
-//             <p>I'm learning React</p>
-//             <button onClick={changePersonName}>change</button>
-//             <Person name={personStaate.person[0].name} age ={personStaate.person[0].age} />
-//             <Person name= {personStaate.person[1].name}age = {personStaate.person[1].age}> I want to be a Dev! </Person>
-//             <Person name={personStaate.person[2].name} age = {personStaate.person[2].age}/>
-//           </div>
-//         );
-// };
-
 
