@@ -44,7 +44,7 @@ const Cockpit = (props) => {
             <button 
                 className={btnClass}
                 onClick={props.clicked}>show</button>
-        </div>
+         </div>
     );
 }
 

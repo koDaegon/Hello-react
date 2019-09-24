@@ -4,7 +4,11 @@ import Person from './Person/Person';
 class Persons extends Component {
 
   shouldComponentUpdate(nextProps , nextState) {
-    if(nextProps.persons !== this.props.persons) {
+    if(
+       nextProps.persons !== this.props.persons ||
+       nextProps.clicked !== this.props.clicked ||
+       nextProps.changed !== this.props.changed
+      ) {
       console.log('[Persons.js] shouldComponentUpdate ');
       return true;
     } else {
