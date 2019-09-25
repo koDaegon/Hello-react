@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-import Persons from '../components/Persons/Persons'
-import Cockpit from '../components/Cockpit/Cockpit'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/withClass';
+import classes from './App.module.css';
 class App extends Component {
   constructor(props) {
     super(props)
@@ -86,7 +87,7 @@ class App extends Component {
     }
 
     return (
-      <div className='App'>
+      <WithClass className={classes.App}>
         <button onClick = {this.toggleCockpitHandler}>
           Remove Cockpit
         </button>
@@ -98,7 +99,7 @@ class App extends Component {
             clicked= {this.togglePersonsHandler}/>
           : null}
         {persons}
-      </div>
+      </WithClass>
     );
   }
 }
