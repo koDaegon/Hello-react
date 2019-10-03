@@ -19,7 +19,8 @@ class App extends Component {
     others : "Hey Jude",
     showPersons : false,
     showCockpit : true,
-    nameChange : 0
+    nameChange : 0,
+    authenticationCheker : false
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -39,6 +40,10 @@ class App extends Component {
     console.log('[App.js] componentDidMount');
   }
 
+  authenticationHandler =() => {
+    this.setState({authenticationCheker : true
+    });
+  };
 
   nameChangedHandler =(event , id) => {
     const personIndex = this.state.persons.findIndex(p =>{
@@ -90,7 +95,8 @@ class App extends Component {
       persons = <Persons
               persons = {this.state.persons}
               clicked = {this.deletePersonHandler}
-              changed = {this.nameChangedHandler} />;
+              changed = {this.nameChangedHandler} 
+              isAuthenticated = {this.state.authenticationCheker}/>;
     }
 
     return (
@@ -103,7 +109,8 @@ class App extends Component {
             name = {this.props.appName}
             personsLength= {this.state.persons.length}
             showPersons= {this.state.showPersons}
-            clicked= {this.togglePersonsHandler}/>
+            clicked= {this.togglePersonsHandler}
+            login= {this.authenticationHandler}/>
           : null}
         {persons}
       </Aux>
